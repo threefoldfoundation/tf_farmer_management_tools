@@ -1,0 +1,80 @@
+---
+- name: lacp config
+  hosts: tor_switches
+  vars:
+    - bond_members: "{{ trunk_interfaces }}"
+    - bond_name: upstream
+    - mode: balance-xor
+  roles:
+    - cumulus.lacp
+
+- name: trunk config
+  hosts: tor_switches
+  vars:
+    - mode: trunk
+    - vlan_id: "{{ mgmt_vlan }},{{ public_vlan }}"
+    - bond: 
+    - interface_range: upstream
+  roles:
+    - cumulus.vlan
+
+- name: access config for vlan 10
+  hosts: tor_switches
+  vars:
+    - mode: access
+    - vlan_id: "{{ mgmt_vlan }}"
+    - interface_range: "{{ mgmt_interfaces }}"
+  roles:
+    - cumulus.vlan
+
+- name: access config for vlan 20
+  hosts: tor_switches
+  vars:
+    - mode: access
+    - vlan_id: "{{ public_vlan }}"
+    - interface_range: "{{ public_interfaces }}"
+  roles:
+    - cumulus.vlan
+
+- name: commit changes
+  hosts: tor_switches
+  tasks:
+    - shell: net commit
+
+- name: ip config
+  hosts: dhcp
+  vars:
+    - ip: "{{ ip_address }}"
+    - ipv6: "{{ ipv6_address }}"
+    - interface_name: "{{ dhcp_interface_name }}"
+    - commit:
+  roles:
+    - cumulus.ip_address
+
+- name: dhcp4 config
+  hosts: dhcp
+  vars:
+    - ansible_sudo_pass: "{{ ansible_ssh_pass }}"
+    - subnets:
+      - subnet: "{{ subnet4 }}"
+        mask: "{{ mask4 }}"
+        range: "{{ range4 }}"
+    - default_lease_time: "{{ dhcp_default_lease_time }}"
+    - max_lease_time: "{{ dhcp_max_lease_time }}"
+    - interface_name: "{{ dhcp_interface_name }}"
+  roles:
+    - cumulus.dhcp
+
+- name: dhcp6 config
+  hosts: dhcp
+  vars:
+    - dhcp6:
+    - ansible_sudo_pass: "{{ ansible_ssh_pass }}"
+    - subnets:
+      - subnet: "{{ subnet6 }}"
+        range: "{{ range6 }}"
+    - default_lease_time: "{{ dhcp_default_lease_time }}"
+    - max_lease_time: "{{ dhcp_max_lease_time }}"
+    - interface_name: "{{ dhcp_interface_name }}"
+  roles:
+    - cumulus.dhcp
