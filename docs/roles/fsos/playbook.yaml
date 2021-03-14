@@ -9,7 +9,7 @@
     - vlan_name: management
     - state: present
   roles:
-    - fsos.vlan
+    - threefold.farm_mgmt.fsos_vlan
 
 - name: configure vlan 20
   hosts: all
@@ -20,7 +20,7 @@
     - vlan_name: business
     - state: present
   roles:
-    - fsos.vlan
+    - threefold.farm_mgmt.fsos_vlan
 
 
 ################### add access ports to vlans 10, 20 #######################
@@ -34,7 +34,7 @@
     - mode: access
     - vlan_id: 10
   roles:
-    - fsos.switchport
+    - threefold.farm_mgmt.fsos_switchport
 
 - name: add vlan 20 members
   hosts: all
@@ -45,7 +45,7 @@
     - mode: access
     - vlan_id: 20
   roles:
-    - fsos.switchport
+    - threefold.farm_mgmt.fsos_switchport
 
 
 ################### configure ip address for vlan interface 10 #######################
@@ -58,7 +58,7 @@
     - interface_name: vlan 10
     - ipv4: 10.10.10.10/24
   roles:
-    - fsos.ip_address
+    - threefold.farm_mgmt.fsos_ip_address
 
 ################### configure lacp #######################
 
@@ -72,7 +72,7 @@
     - mode: auto
     - load_balance_option: src-ip
   roles:
-    - fsos.lacp
+    - threefold.farm_mgmt.fsos_lacp
 
 
 ################### bring up interface #######################
@@ -84,7 +84,7 @@
   vars:
     - interface_range: ethernet 1/1-9
   roles:
-    - fsos.interface_shutdown
+    - threefold.farm_mgmt.fsos_interface_shutdown
 
 ################### configure port channel as trunk for vlans 10,20 #######################
 
@@ -98,16 +98,16 @@
     - vlan_id: 10,20
     - mode: trunk
   roles:
-    - fsos.switchport
+    - threefold.farm_mgmt.fsos_switchport
 
 
 ################### save config #######################
 
-- name: save running config to startup
-  hosts: all
-  connection: ansible.netcommon.network_cli
-  gather_facts: false
-  tasks:
-    - cisco.ios.ios_command:
-        commands:
-          - copy running-config startup-config
+# - name: save running config to startup
+#   hosts: all
+#   connection: ansible.netcommon.network_cli
+#   gather_facts: false
+#   tasks:
+#     - cisco.ios.ios_command:
+#         commands:
+#           - copy running-config startup-config

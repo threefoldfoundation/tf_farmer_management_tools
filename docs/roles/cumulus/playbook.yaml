@@ -6,7 +6,7 @@
     - bond_name: upstream
     - mode: balance-xor
   roles:
-    - cumulus.lacp
+    - cumulus_lacp
 
 - name: trunk config
   hosts: tor_switches
@@ -16,7 +16,7 @@
     - bond: 
     - interface_range: upstream
   roles:
-    - cumulus.vlan
+    - cumulus_vlan
 
 - name: access config for vlan 10
   hosts: tor_switches
@@ -25,7 +25,7 @@
     - vlan_id: "{{ mgmt_vlan }}"
     - interface_range: "{{ mgmt_interfaces }}"
   roles:
-    - cumulus.vlan
+    - cumulus_vlan
 
 - name: access config for vlan 20
   hosts: tor_switches
@@ -34,7 +34,7 @@
     - vlan_id: "{{ public_vlan }}"
     - interface_range: "{{ public_interfaces }}"
   roles:
-    - cumulus.vlan
+    - cumulus_vlan
 
 - name: commit changes
   hosts: tor_switches
@@ -49,7 +49,7 @@
     - interface_name: "{{ dhcp_interface_name }}"
     - commit:
   roles:
-    - cumulus.ip_address
+    - cumulus_ip_address
 
 - name: dhcp4 config
   hosts: dhcp
@@ -63,7 +63,7 @@
     - max_lease_time: "{{ dhcp_max_lease_time }}"
     - interface_name: "{{ dhcp_interface_name }}"
   roles:
-    - cumulus.dhcp
+    - cumulus_dhcp
 
 - name: dhcp6 config
   hosts: dhcp
@@ -77,4 +77,4 @@
     - max_lease_time: "{{ dhcp_max_lease_time }}"
     - interface_name: "{{ dhcp_interface_name }}"
   roles:
-    - cumulus.dhcp
+    - cumulus_dhcp
