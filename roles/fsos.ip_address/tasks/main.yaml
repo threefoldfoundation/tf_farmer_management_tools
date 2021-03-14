@@ -1,0 +1,18 @@
+- block:
+  - name: configure ipv4 address for interface
+    cisco.ios.ios_command:
+      commands: 
+          - configure terminal
+          - "interface {{ interface_name }}"
+          - "ip address {{ ipv4 }}"
+  when: ipv4 is defined
+
+- block:
+  - name: configure ipv6 address for interface
+    cisco.ios.ios_command:
+      commands: 
+          - configure terminal
+          - "interface {{ interface_name }}"
+          - "ipv6 address {{ ipv6 }}"
+  when: ipv6 is defined
+      

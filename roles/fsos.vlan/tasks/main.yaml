@@ -1,0 +1,33 @@
+- block:
+  - block:
+    - name: add vlan without name
+      cisco.ios.ios_command:
+        commands: 
+            - configure terminal
+            - vlan database
+            - "vlan {{ vlan_id }} name {{ vlan_name }}"
+    when: vlan_name is defined
+
+  - block:
+    - name: add vlan with name
+      cisco.ios.ios_command:
+        commands: 
+            - configure terminal
+            - vlan database
+            - "vlan {{ vlan_id }}"
+    when: vlan_name is not defined
+  when: state is not defined or state == "present"
+
+- block:
+  - name: remove vlan by id
+    cisco.ios.ios_command:
+      commands: 
+          - configure terminal
+          - vlan database
+          - "no vlan {{ vlan_id }}"
+  when: state is defined and state == "absent"
+
+
+  
+
+      
