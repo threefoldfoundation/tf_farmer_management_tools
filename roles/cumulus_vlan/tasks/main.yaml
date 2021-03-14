@@ -1,0 +1,52 @@
+---
+- block:
+  - name: create vlan(s)
+    shell: 
+      cmd: net add vlan {{ vlan_id }}
+  when: vlan_ip is not defined
+
+
+- block:
+  - block:
+    - name: create vlan(s)
+      shell: 
+        cmd: net add vlan {{ vlan_id }} ip address {{ vlan_ip }}
+    when: ipv6 is not defined
+
+  - block:
+    - name: create vlan(s)
+      shell: 
+        cmd: net add vlan {{ vlan_id }} ipv6 address {{ vlan_ip }}
+    when: ipv6 is defined
+  
+  when: vlan_ip is defined
+
+
+- block:
+  - name: add interfaces to vlan
+    shell: 
+      cmd: net add interface {{ interface_range }} bridge access {{ vlan_id }}
+  when: mode == 'access'
+
+
+- block:
+  - block:
+    - name: add interfaces to vlan
+      shell: 
+        cmd: net add interface {{ interface_range }} bridge trunk vlans {{ vlan_id }}
+    when: bond is not defined
+
+  - block:
+    - name: add interfaces to vlan
+      shell: 
+        cmd: net add bond {{ interface_range }} bridge trunk vlans {{ vlan_id }}
+    when: bond is defined
+
+  when: mode == 'trunk'
+
+
+- block:
+  - name: commit changes
+    shell: 
+      cmd: net commit
+  when: commit is defined

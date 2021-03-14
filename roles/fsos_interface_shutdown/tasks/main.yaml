@@ -1,0 +1,18 @@
+- block:
+  - name: shutdown interfaces
+    cisco.ios.ios_command:
+      commands:
+        - configure terminal
+        - "interface {{ interface_range }}"
+        - shutdown
+  when: shutdown is defined
+
+- block:
+  - name: bring up interfaces
+    cisco.ios.ios_command:
+      commands:
+        - configure terminal
+        - "interface {{ interface_range }}"
+        - no shutdown
+  when: shutdown is not defined
+

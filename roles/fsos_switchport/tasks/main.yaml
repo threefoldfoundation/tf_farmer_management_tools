@@ -1,0 +1,20 @@
+- block:
+  - name: add interfaces to vlan as access ports
+    cisco.ios.ios_command:
+      commands: 
+          - configure terminal
+          - "interface {{ interface_range }}"
+          - switchport mode access
+          - "switchport access vlan {{ vlan_id }}"
+  when: mode is defined and mode == "access"
+
+- block:
+  - name: add interfaces to vlan as trunk 
+    cisco.ios.ios_command:
+      commands: 
+          - configure terminal
+          - "interface {{ interface_range }}"
+          - switchport mode trunk
+          - "switchport trunk allowed vlan add {{ vlan_id }}"
+
+  when: mode is defined and mode == "trunk"

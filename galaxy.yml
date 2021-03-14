@@ -1,0 +1,10 @@
+namespace: "threefold"
+name: "farm_mgmt"
+version: "0.1.0"
+readme: "README.md"
+authors:
+    - "Maged Motawea"
+tags:
+    - cloud
+    - collection
+repository: "https://github.com/threefoldfoundation/tf_farmer_management_tools"

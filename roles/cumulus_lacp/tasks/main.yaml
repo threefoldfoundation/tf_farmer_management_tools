@@ -1,0 +1,16 @@
+---
+- name: create bond
+  shell: 
+    cmd: net add bond {{ bond_name }} bond slaves {{ bond_members }}
+
+- block:
+  - name: bond mode
+    shell:
+      cmd: net add bond {{ bond_name }} bond mode {{ mode }}
+  when: mode is defined
+
+- block:
+  - name: commit changes
+    shell: 
+      cmd: net commit
+  when: commit is defined
