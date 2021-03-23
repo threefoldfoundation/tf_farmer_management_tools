@@ -1,0 +1,29 @@
+fs3900:
+  hosts:
+    "172.16.1.23":
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    ansible_ssh_user: admin  
+    ansible_ssh_pass: "passwd12#$" 
+    ansible_ssh_common_args: "-o HostKeyAlgorithms=+ssh-dss -o KexAlgorithms=diffie-hellman-group1-sha1 -o Ciphers=3des-cbc" 
+    ansible_network_os: cisco.ios.ios
+    private_vlan: 3000
+    public_vlan: 302
+    private_interface_range: "ethernet 1/1-32"
+    public_interface_range: "ethernet 1/33-48"
+    trunk_port: ethernet 1/52"
+
+openwrt:
+  hosts:
+    "localhost":
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    ansible_ssh_user: maged
+    ansible_ssh_pass: "Maglab123!" 
+    servers:
+      - hostname: tflab_01
+        mac_address: 6c:2b:59:58:18:ae
+        ip_address: 10.1.0.241
+      - hostname: tflab_02
+        mac_address: d8:9c:67:2a:a7:0b
+        ip_address: 10.1.0.242

@@ -1,5 +1,6 @@
+####################### configure network switches #######################
 - name: configure private vlan
-  hosts: all
+  hosts: fs3900
   connection: ansible.netcommon.network_cli
   gather_facts: false
   vars:
@@ -10,7 +11,7 @@
     - threefold.farm_mgmt.fsos_vlan
 
 - name: configure public vlan
-  hosts: all
+  hosts: fs3900
   connection: ansible.netcommon.network_cli
   gather_facts: false
   vars:
@@ -23,7 +24,7 @@
 
 
 - name: add private vlan members
-  hosts: all
+  hosts: fs3900
   connection: ansible.netcommon.network_cli
   gather_facts: false
   vars:
@@ -34,7 +35,7 @@
     - threefold.farm_mgmt.fsos_switchport
 
 - name: add public vlan members
-  hosts: all
+  hosts: fs3900
   connection: ansible.netcommon.network_cli
   gather_facts: false
   vars:
@@ -48,7 +49,7 @@
 
 
 - name: allow public and private vlans on upstream link
-  hosts: all
+  hosts: fs3900
   connection: ansible.netcommon.network_cli
   gather_facts: false
   vars:
@@ -61,7 +62,7 @@
 
 
 - name: save running config to startup
-  hosts: all
+  hosts: fs3900
   connection: ansible.netcommon.network_cli
   gather_facts: false
   tasks:
@@ -70,3 +71,24 @@
           - command: copy running-config startup-config
             prompt: "startup configuration file name:"
             answer: lab
+
+############################################  dhcp config  ##########################################################
+- name: Add mappings to dhcp
+  hosts: openwrt
+  tasks:
+    - blockinfile:
+        path: /etc/config/dhcp
+        block: |
+          config host
+                  option name '{{ item["hostname"] }}'
+                  option dns '1'
+                  option mac '{{ item["mac_address"] }}'
+                  option ip '{{ item["ip_address"] }}'
+        marker: "\n# AUTOMATED BLOCK {{ item['hostname'] }}"
+        
+      with_items: "{{ servers }}"
+
+- name: reload dnsmasq
+  hosts: openwrt
+  tasks:
+    - shell: /etc/init.d/dnsmasq reload
