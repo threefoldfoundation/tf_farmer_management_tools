@@ -1,0 +1,72 @@
+- name: configure private vlan
+  hosts: all
+  connection: ansible.netcommon.network_cli
+  gather_facts: false
+  vars:
+    - vlan_id: "{{ private_vlan }}"
+    - vlan_name: private
+    - state: present
+  roles:
+    - threefold.farm_mgmt.fsos_vlan
+
+- name: configure public vlan
+  hosts: all
+  connection: ansible.netcommon.network_cli
+  gather_facts: false
+  vars:
+    - vlan_id: "{{ public_vlan }}"
+    - vlan_name: public
+    - state: present
+  roles:
+    - threefold.farm_mgmt.fsos_vlan
+
+
+
+- name: add private vlan members
+  hosts: all
+  connection: ansible.netcommon.network_cli
+  gather_facts: false
+  vars:
+    - interface_range: "{{ private_interface_range }}"
+    - mode: access
+    - vlan_id: "{{ private_vlan }}"
+  roles:
+    - threefold.farm_mgmt.fsos_switchport
+
+- name: add public vlan members
+  hosts: all
+  connection: ansible.netcommon.network_cli
+  gather_facts: false
+  vars:
+    - interface_range: "{{ public_interface_range }}"
+    - mode: access
+    - vlan_id: "{{ public_vlan }}"
+  roles:
+    - threefold.farm_mgmt.fsos_switchport
+
+
+
+
+- name: allow public and private vlans on upstream link
+  hosts: all
+  connection: ansible.netcommon.network_cli
+  gather_facts: false
+  vars:
+    - interface_range: "{{ trunk_port }}"
+    - mode: trunk
+    - vlan_id: "{{ private_vlan }},{{ public_vlan }}"
+    - mode: trunk
+  roles:
+    - threefold.farm_mgmt.fsos_switchport
+
+
+- name: save running config to startup
+  hosts: all
+  connection: ansible.netcommon.network_cli
+  gather_facts: false
+  tasks:
+    - cisco.ios.ios_command:
+        commands:
+          - command: copy running-config startup-config
+            prompt: "startup configuration file name:"
+            answer: lab
