@@ -22,8 +22,26 @@ openwrt:
     ansible_ssh_pass: "passwd12#$" 
     servers:
       - hostname: tflab_01
-        mac_address: 6c:2b:59:58:18:ae
+        mac_address: 00:25:90:f7:10:80
         ip_address: 10.1.0.241
       - hostname: tflab_02
-        mac_address: d8:9c:67:2a:a7:0b
+        mac_address: 02:25:90:f0:50:6a
         ip_address: 10.1.0.242
+      - hostname: tflab_03
+        mac_address: 02:25:90:f4:28:26
+        ip_address: 10.1.0.243
+      - hostname: tflab_04
+        mac_address: 02:25:90:f3:89:ea
+        ip_address: 10.1.0.244
+      - hostname: tflab_05
+        mac_address: 02:25:90:f4:3e:86
+        ip_address: 10.1.0.245
+      - hostname: tflab_06
+        mac_address: 00:25:90:f6:2f:d5
+        ip_address: 10.1.0.246
+      - hostname: tflab_07
+        mac_address: 00:25:90:f7:0f:54
+        ip_address: 10.1.0.247
+      - hostname: tflab_08
+        mac_address: 02:25:90:f2:da:c2
+        ip_address: 10.1.0.248
