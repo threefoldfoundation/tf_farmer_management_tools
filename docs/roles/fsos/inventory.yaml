@@ -18,8 +18,8 @@ openwrt:
     "localhost":
   vars:
     ansible_python_interpreter: /usr/bin/python3
-    ansible_ssh_user: maged
-    ansible_ssh_pass: "Maglab123!" 
+    ansible_ssh_user: root
+    ansible_ssh_pass: "passwd12#$" 
     servers:
       - hostname: tflab_01
         mac_address: 6c:2b:59:58:18:ae
