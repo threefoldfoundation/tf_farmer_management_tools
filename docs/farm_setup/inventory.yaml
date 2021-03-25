@@ -1,0 +1,71 @@
+fs3900:
+  hosts:
+    "172.16.1.23":
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    ansible_ssh_user: admin  
+    ansible_ssh_pass: "passwd12#$" 
+    ansible_ssh_common_args: "-o HostKeyAlgorithms=+ssh-dss -o KexAlgorithms=diffie-hellman-group1-sha1 -o Ciphers=3des-cbc" 
+    ansible_network_os: cisco.ios.ios
+    private_vlan: 3000
+    public_vlan: 302
+    private_interface_range: "ethernet 1/1-32"
+    public_interface_range: "ethernet 1/33-48"
+    trunk_port: ethernet 1/52"
+
+openwrt:
+  hosts:
+    "10.2.0.2":
+  vars:
+    ansible_ssh_user: root
+    ansible_ssh_pass: "passwd12#$"
+    ipmi_username: "ADMIN"
+    ipmi_password: "ADMIN"
+    servers:
+      # - hostname: tflab_01
+      #   mac_address: 00:25:90:f7:10:80
+      #   ip_address: 10.1.0.241
+      #   zos_address: 10.1.0.101
+      - hostname: tflab_02
+        mac_address: 02:25:90:f0:50:6a
+        ip_address: 10.1.0.242
+        zos_address: 10.1.0.102
+      # - hostname: tflab_03
+      #   mac_address: 02:25:90:f4:28:26
+      #   ip_address: 10.1.0.243
+      #   zos_address: 10.1.0.103
+      # - hostname: tflab_04
+      #   mac_address: 02:25:90:f3:89:ea
+      #   ip_address: 10.1.0.244
+      #   zos_address: 10.1.0.104
+      # - hostname: tflab_05
+      #   mac_address: 02:25:90:f4:3e:86
+      #   ip_address: 10.1.0.245
+      #   zos_address: 10.1.0.105
+      # - hostname: tflab_06
+      #   mac_address: 00:25:90:f6:2f:d5
+      #   ip_address: 10.1.0.246
+      #   zos_address: 10.1.0.106
+      # - hostname: tflab_07
+      #   mac_address: 00:25:90:f7:0f:54
+      #   ip_address: 10.1.0.247
+      #   zos_address: 10.1.0.107
+      # - hostname: tflab_08
+      #   mac_address: 02:25:90:f2:da:c2
+      #   ip_address: 10.1.0.248
+      #   zos_address: 10.1.0.108
+
+ipmi:
+  hosts:
+    # "10.1.0.241":
+    "10.1.0.242":
+    # "10.1.0.243":
+    # "10.1.0.244":
+    # "10.1.0.245":
+    # "10.1.0.246":
+    # "10.1.0.247":
+    # "10.1.0.248":
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    ipmi_username: admin
+    ipmi_password: "passwd12#$"

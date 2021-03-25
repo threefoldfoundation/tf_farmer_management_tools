@@ -1,0 +1,23 @@
+- name: add mapping to dhcp
+  hosts: openwrt
+  gather_facts: false
+  tasks:
+    - include_tasks: zos_dhcp.yaml
+      with_items: "{{ servers }}"
+
+- name: reload dnsmasq
+  hosts: openwrt
+  gather_facts: false
+  tasks:
+    - raw: /etc/init.d/dnsmasq reload
+
+- hosts: ipmi
+  gather_facts: false
+  connection: local
+  tasks:
+    - name: power on
+      community.general.ipmi_power:
+        name: "{{ ansible_host }}"
+        user: "{{ ipmi_username }}"
+        password: "{{ ipmi_password }}"
+        state: on
