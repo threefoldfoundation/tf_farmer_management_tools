@@ -73,22 +73,15 @@
             answer: lab
 
 ############################################  dhcp config  ##########################################################
-- name: Add mappings to dhcp
+- name: add mapping to dhcp
   hosts: openwrt
+  gather_facts: false
   tasks:
-    - blockinfile:
-        path: /etc/config/dhcp
-        block: |
-          config host
-                  option name '{{ item["hostname"] }}'
-                  option dns '1'
-                  option mac '{{ item["mac_address"] }}'
-                  option ip '{{ item["ip_address"] }}'
-        marker: "\n# AUTOMATED BLOCK {{ item['hostname'] }}"
-        
+    - include_tasks: wrt_dhcp.yaml
       with_items: "{{ servers }}"
 
 - name: reload dnsmasq
   hosts: openwrt
+  gather_facts: false
   tasks:
-    - shell: /etc/init.d/dnsmasq reload
+    - raw: /etc/init.d/dnsmasq reload

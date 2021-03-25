@@ -1,0 +1,6 @@
+- raw: echo "config host" >> /etc/config/dhcp
+- raw: echo "        option name '{{ item.hostname }}'" >> /etc/config/dhcp
+- raw: echo "        option dns '1'" >> /etc/config/dhcp
+- raw: echo "        option mac '{{ item.mac_address }}'" >> /etc/config/dhcp
+- raw: echo "        option ip '{{ item.ip_address }}'" >> /etc/config/dhcp
+- raw: echo "" >> /etc/config/dhcp

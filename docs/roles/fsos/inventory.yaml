@@ -15,9 +15,8 @@ fs3900:
 
 openwrt:
   hosts:
-    "localhost":
+    "10.2.0.2":
   vars:
-    ansible_python_interpreter: /usr/bin/python3
     ansible_ssh_user: root
     ansible_ssh_pass: "passwd12#$" 
     servers:
