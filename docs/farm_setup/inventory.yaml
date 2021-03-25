@@ -19,8 +19,8 @@ openwrt:
   vars:
     ansible_ssh_user: root
     ansible_ssh_pass: "passwd12#$"
-    ipmi_username: "ADMIN"
-    ipmi_password: "ADMIN"
+    ipmi_username: "admin"
+    ipmi_password: "passwd12#$"
     servers:
       # - hostname: tflab_01
       #   mac_address: 00:25:90:f7:10:80
