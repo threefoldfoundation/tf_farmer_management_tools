@@ -23,6 +23,7 @@ openwrt:
     ipmi_password: "passwd12#$"
     farm_id: 33
     farm_name: maglab
+    env: test   # can be dev, test, prod
     servers:
       # - hostname: tflab_01
       #   mac_address: 00:25:90:f7:10:80

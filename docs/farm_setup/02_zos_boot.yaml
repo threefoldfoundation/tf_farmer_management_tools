@@ -2,7 +2,7 @@
   hosts: openwrt
   gather_facts: false
   tasks:
-    - raw: "wget https://bootstrap.grid.tf/ipxe/test/{{ farm_id }} -O /opt/storage/pxelinux.cfg/{{ farm_name }}.ipxe"
+    - raw: "wget https://bootstrap.grid.tf/ipxe/{{ env }}/{{ farm_id }} -O /opt/storage/pxelinux.cfg/{{ farm_name }}.ipxe"
 
 - name: add mapping to dhcp
   hosts: openwrt
