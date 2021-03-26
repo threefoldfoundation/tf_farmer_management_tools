@@ -7,3 +7,7 @@
 - raw: echo "        option mac '{{ mac_address.stdout_lines[0]  }}'" >> /etc/config/dhcp
 - raw: echo "        option ip '{{ item.zos_address }}'" >> /etc/config/dhcp
 - raw: echo "" >> /etc/config/dhcp
+
+- raw: "ipmitool -U {{ ipmi_username }} -P {{ ipmi_password }} -H {{ item.ip_address }} raw 0x30 0x21 | tail -c 18 | sed 's/ /-/g'"
+  register: ipxe_mac_address
+- raw: "ln -s /opt/storage/pxelinux.cfg/{{ farm_name }}.ipxe /opt/storage/pxelinux.cfg/01-{{ ipxe_mac_address.stdout_lines[0] }}"

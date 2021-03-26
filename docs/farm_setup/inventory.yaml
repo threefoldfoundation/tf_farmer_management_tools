@@ -21,23 +21,25 @@ openwrt:
     ansible_ssh_pass: "passwd12#$"
     ipmi_username: "admin"
     ipmi_password: "passwd12#$"
+    farm_id: 33
+    farm_name: maglab
     servers:
       # - hostname: tflab_01
       #   mac_address: 00:25:90:f7:10:80
       #   ip_address: 10.1.0.241
       #   zos_address: 10.1.0.101
-      - hostname: tflab_02
-        mac_address: 02:25:90:f0:50:6a
-        ip_address: 10.1.0.242
-        zos_address: 10.1.0.102
+      # - hostname: tflab_02
+      #   mac_address: 02:25:90:f0:50:6a
+      #   ip_address: 10.1.0.242
+      #   zos_address: 10.1.0.102
       # - hostname: tflab_03
       #   mac_address: 02:25:90:f4:28:26
       #   ip_address: 10.1.0.243
       #   zos_address: 10.1.0.103
-      # - hostname: tflab_04
-      #   mac_address: 02:25:90:f3:89:ea
-      #   ip_address: 10.1.0.244
-      #   zos_address: 10.1.0.104
+      - hostname: tflab_04
+        mac_address: 02:25:90:f3:89:ea
+        ip_address: 10.1.0.244
+        zos_address: 10.1.0.104
       # - hostname: tflab_05
       #   mac_address: 02:25:90:f4:3e:86
       #   ip_address: 10.1.0.245
@@ -58,9 +60,9 @@ openwrt:
 ipmi:
   hosts:
     # "10.1.0.241":
-    "10.1.0.242":
+    # "10.1.0.242":
     # "10.1.0.243":
-    # "10.1.0.244":
+    "10.1.0.244":
     # "10.1.0.245":
     # "10.1.0.246":
     # "10.1.0.247":
