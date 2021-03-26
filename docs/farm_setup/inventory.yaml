@@ -24,6 +24,7 @@ openwrt:
     farm_id: 33
     farm_name: maglab
     env: test   # can be dev, test, prod
+    ipxe_file: /opt/storage/pxelinux.cfg/maglab.ipxe
     servers:
       # - hostname: tflab_01
       #   mac_address: 00:25:90:f7:10:80
