@@ -1,0 +1,19 @@
+version: '3.2'
+
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus.yaml:/etc/prometheus/prometheus.yml
+  snmp_exporter:
+    image: prom/snmp-exporter:latest
+    ports: 
+      - 9116:9116
+  grafana: 
+    image: grafana/grafana:latest
+    ports:
+      - 3000:3000
+    volumes:
+      - ./provisioning:/etc/grafana/provisioning
