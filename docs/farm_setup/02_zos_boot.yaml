@@ -28,4 +28,4 @@
         name: "{{ ansible_host }}"
         user: "{{ ipmi_username }}"
         password: "{{ ipmi_password }}"
-        state: on
+        state: reset
