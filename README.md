@@ -13,7 +13,8 @@ pip3 install --user setuptools_rust pyghmi
 
 ### Install:
 ```
-cd <tf_farmer_management_tools repo dir>
+git clone https://github.com/threefoldfoundation/tf_farmer_management_tools
+cd tf_farmer_management_tools
 ansible-galaxy collection build
 ansible-galaxy collection install threefold-farm_mgmt-0.1.0.tar.gz
 ```
