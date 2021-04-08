@@ -7,13 +7,11 @@ these playbooks were used to configure the tor switch + servers used to boot a f
 
 1- ToR switch connected to the router on a trunk link with management ip configured
 
-2- ToR switch accessible over its management ip address
+2- MAC addresses of the servers
 
-3- MAC addresses of the servers
+3- OpenWRT node used as dhcp/ipxe server
 
-4- OpenWRT node used as dhcp/ipxe server
-
-5- (optional) if you have an old ipxe version on the servers, create your own ipxe script on OpenWRT node
+4- (optional) if you have an old ipxe version on the servers, create your own ipxe script on OpenWRT node
 
 
 ### Playbooks:
