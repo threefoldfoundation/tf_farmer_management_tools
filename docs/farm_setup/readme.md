@@ -1,11 +1,18 @@
+# Farm Setup
+
 these playbooks were used to configure the tor switch + servers used to boot a farm
 
 
 ### Environment Descriptions
+
 1- ToR switch connected to the router on a trunk link with management ip configured
+
 2- ToR switch accessible over its management ip address
+
 3- MAC addresses of the servers
+
 4- OpenWRT node used as dhcp/ipxe server
+
 5- (optional) if you have an old ipxe version on the servers, create your own ipxe script on OpenWRT node
 
 
