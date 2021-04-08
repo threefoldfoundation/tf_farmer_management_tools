@@ -64,7 +64,9 @@ variables to configure:
 
 
 ### Run:
+
 The playbooks should run in specific order as numbered in their names
+
 1- configure the ToR switch and static DHCP for servers' BMC.
 ```
 ansible-playbbok -i inventory.yaml 01_network_setup.yaml
