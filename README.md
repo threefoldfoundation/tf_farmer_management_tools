@@ -1,6 +1,6 @@
-# tf_farmer_management_tools
+# ThreeFold Farmer management tools
 
-This repo is the main place for ThreeFold farmers to educate themselves on how to setup professional datacenter based ThreeFold farms. It also contains tools which can be used by farmers to setup and maintain their farms.
+This repo is the main place for ThreeFold farmers to educate themselves on how to setup professional large scale node ThreeFold farms. It also contains tools which can be used by farmers to setup and maintain their farms.
 
 ### Installation Prerequisites:
 - `pyghmi` used in ansible `ipmi_power` module
